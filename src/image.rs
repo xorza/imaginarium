@@ -287,18 +287,18 @@ impl Image {
         save_tiff(self, filename)
     }
 
-    pub fn convert(&self, color_format: ColorFormat) -> anyhow::Result<Image> {
+    pub fn convert(self, color_format: ColorFormat) -> anyhow::Result<Image> {
         color_format.validate()?;
 
         if self.desc.color_format == color_format {
-            return Err(anyhow::anyhow!("Image is already in the requested format"));
+            return Ok(self);
         }
 
         let desc = ImageDesc::new(self.desc.width, self.desc.height, color_format);
 
         let mut result = Image::new_empty(desc)?;
 
-        convert_image(self, &mut result)?;
+        convert_image(&self, &mut result)?;
 
         Ok(result)
     }

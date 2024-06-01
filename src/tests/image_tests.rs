@@ -39,12 +39,14 @@ fn image_convertion() {
     png.save_file("./test_output/rgba-sample-8bit.png")
         .unwrap();
 
-    png.convert(ColorFormat::GRAY_U16)
+    png.clone()
+        .convert(ColorFormat::GRAY_U16)
         .unwrap()
         .save_file("./test_output/convertion-gray-u16.png")
         .unwrap();
 
-    png.convert(ColorFormat::RGB_U16)
+    png.clone()
+        .convert(ColorFormat::RGB_U16)
         .unwrap()
         .save_file("./test_output/convertion-rgb-u16.png")
         .unwrap();
@@ -54,57 +56,68 @@ fn image_convertion() {
     tiff.save_file("./test_output/rgb-sample-32bit.tiff")
         .unwrap();
 
-    tiff.convert(ColorFormat::GRAY_U16)
+    tiff.clone()
+        .convert(ColorFormat::GRAY_U16)
         .unwrap()
         .save_file("./test_output/convertion-gray-u16.tiff")
         .unwrap();
 
-    tiff.convert(ColorFormat::RGBA_U16)
+    tiff.clone()
+        .convert(ColorFormat::RGBA_U16)
         .unwrap()
         .save_file("./test_output/convertion-rgba-u16.tiff")
         .unwrap();
 
-    tiff.convert(ColorFormat::RGBA_U8)
+    tiff.clone()
+        .convert(ColorFormat::RGBA_U8)
         .unwrap()
         .save_file("./test_output/convertion-rgba-u8.tiff")
         .unwrap();
 
-    tiff.convert(ColorFormat::GRAY_I8)
+    tiff.clone()
+        .convert(ColorFormat::GRAY_I8)
         .unwrap()
         .save_file("./test_output/convertion-gray-i8.tiff")
         .unwrap();
 
-    tiff.convert(ColorFormat::RGBA_F64)
+    tiff.clone()
+        .convert(ColorFormat::RGBA_F64)
         .unwrap()
         .save_file("./test_output/convertion-rgba-f64.tiff")
         .unwrap();
 
-    tiff.convert(ColorFormat::RGBA_U64)
+    tiff.clone()
+        .convert(ColorFormat::RGBA_U64)
         .unwrap()
         .save_file("./test_output/convertion-rgba-u64.tiff")
         .unwrap();
 
-    tiff.convert(ColorFormat::RGBA_I32)
+    tiff.clone()
+        .convert(ColorFormat::RGBA_I32)
         .unwrap()
         .save_file("./test_output/convertion-gray-i64.tiff")
         .unwrap();
 
-    tiff.convert(ColorFormat::RGBA_F32)
+    tiff.clone()
+        .convert(ColorFormat::RGBA_F32)
         .unwrap()
         .save_file("./test_output/convertion-rgba-f32.tiff")
         .unwrap();
 
-    tiff.convert(ColorFormat::GRAY_ALPHA_U8)
+    tiff.clone()
+        .convert(ColorFormat::GRAY_ALPHA_U8)
         .unwrap()
         .save_file("./test_output/convertion-ga-u8.tiff")
         .unwrap();
 
-    tiff.convert(ColorFormat::RGB_I32)
+    tiff.clone()
+        .convert(ColorFormat::RGB_I32)
         .unwrap()
         .save_file("./test_output/convertion-rgb-i32.tiff")
         .unwrap();
 
-    tiff.convert(ColorFormat::RGBA_F32)
+    tiff.clone()
+        .convert(ColorFormat::RGBA_F32)
         .unwrap()
         .convert(ColorFormat::RGBA_U16)
         .unwrap()
