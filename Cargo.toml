@@ -1,0 +1,13 @@
+[package]
+name = "imaginarium"
+version = "0.1.0"
+edition = "2021"
+
+
+[dependencies]
+tiff = { version = "0.9" }
+png = { version = "0.17" }
+image = { version = "0.25" }
+anyhow = { version = "1.0" }
+bytemuck = { version = "1.16", features = ["derive"] }
+num-traits = { version = "0.2" }
