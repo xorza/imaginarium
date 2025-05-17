@@ -433,6 +433,7 @@ fn convert_pixels<From, To>(
 
     if from.desc.color_format().channel_count == to.desc.color_format().channel_count
         && from.desc.color_format().channel_size == to.desc.color_format().channel_size
+        && from.desc.color_format().channel_type == to.desc.color_format().channel_type
     {
         return;
     }
