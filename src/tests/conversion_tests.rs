@@ -1,4 +1,4 @@
-use crate::image_convertion::{
+use crate::image_conversion::{
     u8_to_i8, i8_to_u8,
     u16_to_i16, i16_to_u16,
     u32_to_i32, i32_to_u32,
