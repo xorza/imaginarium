@@ -326,11 +326,12 @@ pub(crate) fn save_tiff<P: AsRef<Path>>(image: &Image, filename: P) -> anyhow::R
 }
 
 fn save_tiff_internal<ColorType, P: AsRef<Path>>(image: &Image, filename: P) -> anyhow::Result<()>
-    where
-        ColorType: colortype::ColorType,
-        [ColorType::Inner]: TiffValue,
+where
+    ColorType: colortype::ColorType,
+    [ColorType::Inner]: TiffValue,
 {
-    let buf: &[ColorType::Inner] = cast_slice(&image.bytes)?;
+    let buf: &[ColorType::Inner] =
+        cast_slice(&image.bytes).map_err(|e| anyhow::anyhow!("{}", e))?;
 
     let mut file = File::create(filename)?;
     let mut tiff = TiffEncoder::new(&mut file)?;
@@ -342,9 +343,9 @@ fn save_tiff_internal<ColorType, P: AsRef<Path>>(image: &Image, filename: P) -> 
 }
 
 fn cast_slice<A, B>(a: &[A]) -> Result<&[B], PodCastError>
-    where
-        A: Pod + Copy,
-        [B]: TiffValue,
+where
+    A: Pod + Copy,
+    [B]: TiffValue,
 {
     if align_of::<B>() > align_of::<A>() && (a.as_ptr() as usize) % align_of::<B>() != 0 {
         Err(PodCastError::TargetAlignmentGreaterAndInputNotAligned)
