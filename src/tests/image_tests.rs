@@ -140,3 +140,31 @@ fn save_tiff_invalid_bytes_propagates_error() {
     let result = img.save_file("./test_output/invalid.tiff");
     assert!(result.is_err());
 }
+
+fn save_rgba_int_tiffs() {
+    let png = Image::read_file("./test_resources/rgba-sample-8bit.png").unwrap();
+
+    png.clone()
+        .convert(ColorFormat::RGBA_I8)
+        .unwrap()
+        .save_file("./test_output/save-rgba-i8.tiff")
+        .unwrap();
+
+    png.clone()
+        .convert(ColorFormat::RGBA_I16)
+        .unwrap()
+        .save_file("./test_output/save-rgba-i16.tiff")
+        .unwrap();
+
+    png.clone()
+        .convert(ColorFormat::RGBA_I32)
+        .unwrap()
+        .save_file("./test_output/save-rgba-i32.tiff")
+        .unwrap();
+
+    png
+        .convert(ColorFormat::RGBA_I64)
+        .unwrap()
+        .save_file("./test_output/save-rgba-i64.tiff")
+        .unwrap();
+}
