@@ -126,6 +126,16 @@ fn image_convertion() {
 }
 
 #[test]
+fn save_tiff_with_misaligned_bytes_returns_error() {
+    use crate::image::ImageDesc;
+
+    let desc = ImageDesc::new(1, 1, ColorFormat::GRAY_U16);
+    let img = Image::new_with_data(desc, vec![0u8; 3]).unwrap();
+
+    let result = img.save_file("./test_output/misaligned.tiff");
+    assert!(result.is_err());
+}
+
 fn read_missing_png_propagates_error() {
     let result = Image::read_file("./test_resources/does_not_exist.png");
     assert!(result.is_err());
