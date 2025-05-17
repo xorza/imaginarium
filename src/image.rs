@@ -69,7 +69,7 @@ impl Image {
     }
 
     fn load_png_jpeg<P: AsRef<Path>>(filename: P) -> anyhow::Result<Image> {
-        let img = image_lib::open(filename).expect("Failed to open image");
+        let img = image_lib::open(filename)?;
 
         let (channel_count, channel_size, channel_type) = match img.color() {
             // @formatter:off
