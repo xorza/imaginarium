@@ -697,7 +697,7 @@ pub(crate) fn u64_to_u64(value: u64) -> u64 {
 
 #[inline]
 pub(crate) fn u8_to_i8(value: u8) -> i8 {
-    (value / 2) as i8
+    (value as i16 - 128) as i8
 }
 #[inline]
 pub(crate) fn u8_to_i16(value: u8) -> i16 {
@@ -718,7 +718,7 @@ pub(crate) fn u16_to_i8(value: u16) -> i8 {
 }
 #[inline]
 pub(crate) fn u16_to_i16(value: u16) -> i16 {
-    (value / 2) as i16
+    (value as i32 - 32768) as i16
 }
 #[inline]
 pub(crate) fn u16_to_i32(value: u16) -> i32 {
@@ -739,7 +739,7 @@ pub(crate) fn u32_to_i16(value: u32) -> i16 {
 }
 #[inline]
 pub(crate) fn u32_to_i32(value: u32) -> i32 {
-    (value / 2) as i32
+    (value as i64 - 2_147_483_648) as i32
 }
 #[inline]
 pub(crate) fn u32_to_i64(value: u32) -> i64 {
@@ -760,12 +760,12 @@ pub(crate) fn u64_to_i32(value: u64) -> i32 {
 }
 #[inline]
 pub(crate) fn u64_to_i64(value: u64) -> i64 {
-    (value / 2) as i64
+    (value as i128 - 9_223_372_036_854_775_808_i128) as i64
 }
 
 #[inline]
 pub(crate) fn i8_to_u8(value: i8) -> u8 {
-    value.max(0) as u8 * 2
+    (value as i16 + 128) as u8
 }
 #[inline]
 pub(crate) fn i8_to_u16(value: i8) -> u16 {
@@ -786,7 +786,7 @@ pub(crate) fn i16_to_u8(value: i16) -> u8 {
 }
 #[inline]
 pub(crate) fn i16_to_u16(value: i16) -> u16 {
-    value.max(0) as u16 * 2
+    (value as i32 + 32768) as u16
 }
 #[inline]
 pub(crate) fn i16_to_u32(value: i16) -> u32 {
@@ -807,7 +807,7 @@ pub(crate) fn i32_to_u16(value: i32) -> u16 {
 }
 #[inline]
 pub(crate) fn i32_to_u32(value: i32) -> u32 {
-    value.max(0) as u32 * 2
+    (value as i64 + 2_147_483_648) as u32
 }
 #[inline]
 pub(crate) fn i32_to_u64(value: i32) -> u64 {
@@ -828,7 +828,7 @@ pub(crate) fn i64_to_u32(value: i64) -> u32 {
 }
 #[inline]
 pub(crate) fn i64_to_u64(value: i64) -> u64 {
-    value.max(0) as u64 * 2
+    (value as i128 + 9_223_372_036_854_775_808_i128) as u64
 }
 
 #[inline]
