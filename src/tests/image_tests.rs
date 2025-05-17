@@ -124,3 +124,14 @@ fn image_convertion() {
         .save_file("./test_output/convertion-x2-rgba-u16.tiff")
         .unwrap();
 }
+
+#[test]
+fn save_tiff_with_misaligned_bytes_returns_error() {
+    use crate::image::ImageDesc;
+
+    let desc = ImageDesc::new(1, 1, ColorFormat::GRAY_U16);
+    let img = Image::new_with_data(desc, vec![0u8; 3]).unwrap();
+
+    let result = img.save_file("./test_output/misaligned.tiff");
+    assert!(result.is_err());
+}
