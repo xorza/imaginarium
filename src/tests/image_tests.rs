@@ -1,6 +1,5 @@
 use crate::color_format::*;
 use crate::image::{Image, ImageDesc};
-use bytemuck::{cast_slice, cast_vec};
 
 #[test]
 fn it_works() {
@@ -189,10 +188,10 @@ fn convert_rgba_u8_to_rgba_i8() {
     let result = src.convert(ColorFormat::RGBA_I8).unwrap();
     assert_eq!(result.desc.color_format(), ColorFormat::RGBA_I8);
     let expected_vals = [
-        crate::image_convertion::u8_to_i8(0),
-        crate::image_convertion::u8_to_i8(128),
-        crate::image_convertion::u8_to_i8(255),
-        crate::image_convertion::u8_to_i8(64),
+        crate::image_conversion::u8_to_i8(0),
+        crate::image_conversion::u8_to_i8(128),
+        crate::image_conversion::u8_to_i8(255),
+        crate::image_conversion::u8_to_i8(64),
     ];
     let expected_bytes: Vec<u8> = bytemuck::cast_slice(&expected_vals).to_vec();
     assert_eq!(result.bytes, expected_bytes);
@@ -201,13 +200,17 @@ fn convert_rgba_u8_to_rgba_i8() {
 #[test]
 fn convert_rgb_u16_to_rgb_i16() {
     let desc = ImageDesc::new(1, 1, ColorFormat::RGB_U16);
-    let src = Image::new_with_data(desc, bytemuck::cast_vec(vec![0u16, 32768, 65535])).unwrap();
+    let data = vec![0u16, 32768, 65535]
+        .iter()
+        .flat_map(|&n| n.to_ne_bytes())
+        .collect::<Vec<u8>>();
+    let src = Image::new_with_data(desc, data).unwrap();
     let result = src.convert(ColorFormat::RGB_I16).unwrap();
     assert_eq!(result.desc.color_format(), ColorFormat::RGB_I16);
     let expected_vals = [
-        crate::image_convertion::u16_to_i16(0),
-        crate::image_convertion::u16_to_i16(32768),
-        crate::image_convertion::u16_to_i16(65535),
+        crate::image_conversion::u16_to_i16(0),
+        crate::image_conversion::u16_to_i16(32768),
+        crate::image_conversion::u16_to_i16(65535),
     ];
     let expected_bytes: Vec<u8> = bytemuck::cast_slice(&expected_vals).to_vec();
     assert_eq!(result.bytes, expected_bytes);
@@ -219,7 +222,7 @@ fn convert_gray_u8_to_gray_i8() {
     let src = Image::new_with_data(desc, vec![200]).unwrap();
     let result = src.convert(ColorFormat::GRAY_I8).unwrap();
     assert_eq!(result.desc.color_format(), ColorFormat::GRAY_I8);
-    let expected_val = crate::image_convertion::u8_to_i8(200);
+    let expected_val = crate::image_conversion::u8_to_i8(200);
     let expected_bytes: Vec<u8> = bytemuck::cast_slice(&[expected_val]).to_vec();
     assert_eq!(result.bytes, expected_bytes);
 }
