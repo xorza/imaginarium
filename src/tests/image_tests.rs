@@ -1,5 +1,5 @@
 use crate::color_format::*;
-use crate::image::Image;
+use crate::image::{Image, ImageDesc};
 
 #[test]
 fn it_works() {
@@ -126,6 +126,21 @@ fn image_convertion() {
 }
 
 #[test]
+fn read_missing_png_propagates_error() {
+    let result = Image::read_file("./test_resources/does_not_exist.png");
+    assert!(result.is_err());
+}
+
+#[test]
+fn save_tiff_invalid_bytes_propagates_error() {
+    let desc = ImageDesc::new(1, 1, ColorFormat::GRAY_U16);
+    // 3 bytes is not a multiple of u16 size, so cast_slice should fail
+    let img = Image::new_with_data(desc, vec![0u8; 3]).unwrap();
+
+    let result = img.save_file("./test_output/invalid.tiff");
+    assert!(result.is_err());
+}
+
 fn save_rgba_int_tiffs() {
     let png = Image::read_file("./test_resources/rgba-sample-8bit.png").unwrap();
 

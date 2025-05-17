@@ -330,13 +330,13 @@ fn save_tiff_internal<ColorType, P: AsRef<Path>>(image: &Image, filename: P) -> 
         ColorType: colortype::ColorType,
         [ColorType::Inner]: TiffValue,
 {
-    let buf: &[ColorType::Inner] = cast_slice(&image.bytes).unwrap();
+    let buf: &[ColorType::Inner] = cast_slice(&image.bytes)?;
 
     let mut file = File::create(filename)?;
     let mut tiff = TiffEncoder::new(&mut file)?;
     let img = tiff.new_image::<ColorType>(image.desc.width(), image.desc.height())?;
 
-    img.write_data(buf).unwrap();
+    img.write_data(buf)?;
 
     Ok(())
 }
