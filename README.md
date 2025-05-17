@@ -8,7 +8,7 @@ Add the crate to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-imaginarium = "0.1"
+imaginarium = { git = "https://github.com/xorza/imaginarium.git" }
 ```
 
 ## Usage
