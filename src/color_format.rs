@@ -55,7 +55,7 @@ impl ChannelSize {
             8 => ChannelSize::_8bit,
             16 => ChannelSize::_16bit,
             32 => ChannelSize::_32bit,
-            62 => ChannelSize::_64bit,
+            64 => ChannelSize::_64bit,
             _ => panic!("Invalid channel size: {:?}", bit_count),
             // @formatter:on
         }
