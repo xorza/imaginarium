@@ -5,7 +5,7 @@ use image as image_lib;
 use tiff::decoder::DecodingResult;
 
 use crate::color_format::*;
-use crate::image_convertion::convert_image;
+use crate::image_conversion::convert_image;
 use crate::tiff_extentions::save_tiff;
 
 fn align_stride(n: u32) -> u32 {
