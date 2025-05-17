@@ -136,6 +136,7 @@ fn save_tiff_with_misaligned_bytes_returns_error() {
     assert!(result.is_err());
 }
 
+#[test]
 fn read_missing_png_propagates_error() {
     let result = Image::read_file("./test_resources/does_not_exist.png");
     assert!(result.is_err());
@@ -151,6 +152,7 @@ fn save_tiff_invalid_bytes_propagates_error() {
     assert!(result.is_err());
 }
 
+#[test]
 fn save_rgba_int_tiffs() {
     let png = Image::read_file("./test_resources/rgba-sample-8bit.png").unwrap();
 
