@@ -33,7 +33,7 @@ fn save_rgb_png() {
 }
 
 #[test]
-fn image_convertion() {
+fn image_conversion() {
     let png = Image::read_file("./test_resources/rgba-sample-8bit.png").unwrap();
 
     png.save_file("./test_output/rgba-sample-8bit.png")
